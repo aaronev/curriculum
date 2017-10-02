@@ -76,7 +76,7 @@ chai.Assertion.addMethod('haveDuplicates', function() {
       dups.push(member)
     }
   })
-
+  
   this.assert(
     dups.length !== 0,
     "expected #{this} to have duplicates",
@@ -85,3 +85,27 @@ chai.Assertion.addMethod('haveDuplicates', function() {
     dups // actual
   );
 })
+global.createWebserverAgent = function(){
+  const agent = chai.request.agent(webServer)
+  agent.loginAs = function(user, callback){
+    return this
+    .post('/__login')
+    .send(user)
+    .end(function(error, response){
+      if (error) return callback(error)
+      //expect(this).to.have.cookie('__user');
+      callback(null, callback)
+    })
+  }
+  agent.loginAsLearner = function(callback){
+    return this.loginAs({
+      id: 'FAKE_USER_ID',
+      handle: 'Fake_User',
+      name: 'Fake User',
+      handle: 'fakeuser',
+      isAdmin: true,
+      roles: ['learner', 'admin'],
+    }, callback)
+  }
+  return agent
+}
