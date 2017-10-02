@@ -40,10 +40,6 @@ app.get('/', (request, response, next) => {
   response.renderMarkdownFile(`/README.md`)
 })
 
-app.get('/*', (request, response, next) => {
-  response.renderFile(request.path)
-})
-
 ;[
   'CONTRIBUTING.md',
   'SUPPORT.md',
@@ -53,6 +49,9 @@ app.get('/*', (request, response, next) => {
   })
 })
 
+app.get('*', (request, response, next) => {
+  response.renderFile(request.path)
+})
 
 if (!module.parent) {
   app.listen(process.env.PORT, () => {
