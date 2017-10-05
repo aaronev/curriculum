@@ -33,10 +33,6 @@
     "chalk": "^2.0.1",
     "cheerio": "^1.0.0-rc.2",
     "compression": "^1.7.0",
-<<<<<<< HEAD
-=======
-    "cookie-parser": "^1.4.3",
->>>>>>> modifies for testing
     "cookies": "^0.7.1",
     "csv-stringify": "^1.0.4",
     "ejs": "^2.5.6",
